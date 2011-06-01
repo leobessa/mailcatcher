@@ -1,10 +1,11 @@
 require 'active_support/all'
 require 'eventmachine'
-require ‘rbconfig’
+require 'rbconfig'
 require 'thin'
+require 'optparse'
 
 def windows?
-  Config::CONFIG[‘host_os’] =~ /mswin|mingw/
+  Config::CONFIG['host_os'] =~ /mswin|mingw/
 end
 
 module MailCatcher
@@ -21,7 +22,7 @@ module MailCatcher
     :http_ip => '127.0.0.1',
     :http_port => '1080',
     :verbose => false,
-    :daemon => true unless windows?,
+    :daemon => (true unless windows?)
   }
 
   def self.parse! arguments=ARGV, defaults=@@defaults
